@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PXP Coin</title> <!-- Title updated to PXP Coin -->
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1e2a33; /* Dark background for sci-fi look */
+            color: #a1ff00; /* Green text */
+            text-align: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background-image: url('https://via.placeholder.com/1200x500/000000/00FF00?text=PXP+Coin'); /* Placeholder for PXP Coin background */
+            background-size: cover;
+            padding: 60px;
+            color: white;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin: 0;
+            letter-spacing: 3px;
+        }
+
+        /* Button Styles */
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 8px;
+            background-color: rgba(0, 255, 0, 0.7); /* Semi-transparent green */
+            color: white;
+            cursor: pointer;
+            transition: transform 0.2s ease-in-out, background-color 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+            background-color: #00ff00;
+        }
+
+        button:focus {
+            outline: none;
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: #000000;
+            color: #a1ff00;
+            padding: 20px;
+            margin-top: 40px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        footer a {
+            color: #00ff00;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Iframe Styles */
+        .iframe-container {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #333;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
+        }
+
+        iframe {
+            width: 100%;
+            height: 500px;
+            border: none;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>Welcome to PXP Coin</h1>
+        </header>
+
+        <!-- Main Content -->
+        <div class="button-container">
+            <button onclick="window.location.href='send-money.html'">Send Money</button>
+            <button onclick="window.location.href='https://www.facebook.com/md.ali.jim.official'">Local Help</button>
+            <button onclick="window.location.href='index.html'">Go Home</button>
+            <button onclick="window.location.href='video.html'">See the Video</button>
+        </div>
+
+        <!-- Iframe Section -->
+        <div class="iframe-container">
+            <h2>Fill Out the Form Below</h2>
+            <iframe src="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAMAAHXP67ZUNERQV0w0Rk4zM1UyMEk1UDM5ODgxSUZJTC4u" 
+                    title="PXP Coin Form"></iframe>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 PXP Coin. All Rights Reserved. | <a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Service</a></p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microsoft Form</title>
+    <style>
+        /* Sci-Fi Background */
+        body {
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: black;
+        }
+
+        /* Animated Stars */
+        .background {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: url('https://i.imgur.com/q9D4sGU.gif') center/cover no-repeat;
+            z-index: -1;
+            opacity: 0.6;
+        }
+
+        /* Fullscreen iFrame */
+        .container {
+            width: 90vw;
+            height: 90vh;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Fallback Button */
+        .fallback {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 10px 20px;
+            background: cyan;
+            color: black;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .fallback:hover {
+            background: lime;
+            box-shadow: 0 0 15px lime;
+        }
+    </style>
+</head>
+<body>
+    <div class="background"></div>
+    
+    <div class="container">
+        <iframe src="https://forms.office.com/r/mVvnkV0xSc"></iframe>
+    </div>
+
+ 
+</body>
+</html>

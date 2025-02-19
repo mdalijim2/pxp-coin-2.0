@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Code Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #00ff99;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            transition: background-color 1s;
+        }
+        .login-box {
+            background: #111;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 255, 153, 0.5);
+            width: 300px;
+        }
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #00ff99;
+            border-radius: 5px;
+            background: #000;
+            color: #00ff99;
+            font-size: 16px;
+        }
+        .login-btn {
+            padding: 10px;
+            background: #00ff99;
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+        .login-btn:hover {
+            background: #00cc77;
+        }
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-box">
+    <h2>Enter Security Code</h2>
+    <input type="text" id="securityCode" placeholder="Enter Security Code" required>
+    <button class="login-btn" onclick="checkSecurity()">Login</button>
+</div> 
+<a href="https://www.facebook.com/md.ali.jim.official" target="_blank">
+    <button class="login-btn"> Forgot Security Code</button>
+</a>
+<p class="error" id="errorMsg"></p>
+
+<!-- Facebook Like Button -->
+<div class="fb-like" data-href="https://www.facebook.com/md.ali.jim.official" data-width="" data-layout="button_count" data-action="like" data-size="small" data-share="true"></div>
+
+<!-- SDK for Facebook -->
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v10.0"></script>
+
+<script>
+    // Function to generate a random hex color with opacity
+    function getRandomColor() {
+        const letters = '0123456789ABCDEF';
+        let color = '#';
+        for (let i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
+
+    // Apply random background color with 55% opacity
+    document.body.style.backgroundColor = getRandomColor() + '8C'; // '8C' is the hex code for ~55% opacity
+
+    function checkSecurity() {
+        const securityCode = document.getElementById("securityCode").value.trim();
+
+        // সিকিউরিটি কোড খালি হলে
+        if (!securityCode) {
+            document.getElementById("errorMsg").innerText = "Please enter a security code!";
+            return;
+        }
+
+        // যদি (p3) না থাকে, তাহলে ভুল দেখাবে
+        if (!securityCode.includes("p3")) {
+            document.getElementById("errorMsg").innerText = "ভুল সিকিউরিটি কোড!";
+            return;
+        }
+
+        // ফাইলের নাম তৈরি করা (সিকিউরিটি কোড + .html)
+        const targetPage = securityCode + ".html";
+
+        // নতুন পেজে নিয়ে যাবে
+        window.location.href = targetPage;
+    }
+</script>
+
+</body>
+</html>

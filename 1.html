@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content=device-width, initial-scale=1.0">
+    <title>Multi-User Login</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #111;
+            color: #00ff99;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .login-box {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 255, 153, 0.5);
+            text-align: center;
+            width: 320px;
+        }
+        .login-box h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        .input-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        .input-group label {
+            display: block;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #00ff99;
+            border-radius: 5px;
+            background: #222;
+            color: #00ff99;
+            font-size: 16px;
+        }
+        .login-btn {
+            width: 100%;
+            padding: 10px;
+            background: #00ff99;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            color: #111;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .login-btn:hover {
+            background: #009966;
+        }
+        .message {
+            margin-top: 15px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-box">
+    <h2>Login PXP</h2>
+    <div class="input-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" placeholder="Enter username">
+    </div>
+    <div class="input-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="Enter password">
+    </div>
+    <button class="login-btn" onclick="validateLogin()">Login</button>
+    <p class="message" id="message"></p>
+</div>
+
+<script>
+    // ইউজারনেম ও পাসওয়ার্ড লিস্ট (সার্ভার বা ডাটাবেজ ব্যবহার করলে এখান থেকে নিতে হবে)
+    const users = [
+        { username: "admin", password: "1234" },
+        { username: "user1", password: "pass1" },
+        { username: "user2", password: "pass2" },
+        { username: "john", password: "doe123" }
+    ];
+
+    function validateLogin() {
+        let username = document.getElementById("username").value.trim();
+        let password = document.getElementById("password").value.trim();
+        let messageBox = document.getElementById("message");
+
+        if (username === "" || password === "") {
+            messageBox.innerHTML = "❌ Username & Password required!";
+            messageBox.style.color = "red";
+            return;
+        }
+
+        // ইউজার যাচাই করা হচ্ছে
+        let validUser = users.find(user => user.username === username && user.password === password);
+
+        if (validUser) {
+            messageBox.innerHTML = "✅ Login Successful!";
+            messageBox.style.color = "green";
+
+            // ২ সেকেন্ড পরে ৫৫.html পেজে নিয়ে যাবে
+            setTimeout(() => {
+                window.location.href = "55.html";
+            }, 2000);
+            
+        } else {
+            messageBox.innerHTML = "❌ Invalid Username or Password!";
+            messageBox.style.color = "red";
+        }
+    }
+</script>
+
+</body>
+</html>

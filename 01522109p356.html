@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PXP Coin Wallet</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #111;
+            color: #00ff99;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            background: radial-gradient(circle, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.8) 100%);
+        }
+
+        .header {
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #00ff99;
+            padding: 15px;
+            text-align: center;
+            position: fixed;
+            top: 0;
+            z-index: 999;
+        }
+
+        .main-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            width: 80%;
+            max-width: 1100px;
+            margin-top: 100px;
+            gap: 20px;
+        }
+
+        .user-info {
+            width: 45%;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(0, 255, 153, 0.5);
+        }
+
+.user-info div {
+    font-size: 1.2rem;
+    padding: 10px;
+    border-bottom: 1px solid rgba(0, 255, 153, 0.3);
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+}
+
+.user-info div:last-child {
+    border-bottom: none;
+}
+
+.user-info span {
+    color: #00ff99;
+    text-transform: uppercase;
+}
+
+
+        .chart-container {
+            width: 50%;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
+            padding: 15px;
+            box-shadow: 0 0 20px rgba(0, 255, 153, 0.5);
+            text-align: center;
+        }
+
+        .chart-container canvas {
+            width: 100% !important;
+            height: 300px !important;
+        }
+
+        .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .button {
+            padding: 12px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            background-color: #00ff99;
+            color: #111;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+
+        .button:hover {
+            background-color: #00cc77;
+        }
+
+        .footer {
+            width: 100%;
+            text-align: center;
+            padding: 15px 0;
+            position: fixed;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #00ff99;
+            font-size: 1rem;
+        }
+
+        @media (max-width: 900px) {
+            .main-content {
+                flex-direction: column;
+                width: 90%;
+                align-items: center;
+            }
+            .user-info, .chart-container {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>PXP Coin Wallet</h1>
+</div>
+
+<div class="main-content">
+    <div class="user-info">
+        <h2>PXP 
+User Information</h2>
+        <div><span>Username:</span>mdalijim2005</div>
+<div><span> SL No:</span>200502369</div>
+        <div><span>Balance:</span>1296.339 PXP</div>
+<div><span>Name:</span>MD Ali Jim</div>
+        <div><span>PPWS No:</span>01939071668</div>
+	<div><span> Security Code:</span>01522109p356</div>
+        <div class="button-container">
+            <a href="4.html" class="button">Buy PXP</a>
+            <a href="https://forms.office.com/r/ZAeizdpGTA" class="button">Withdraw PXP</a>
+            <a href="https://www.facebook.com/md.ali.jim.official" class="button">Help</a>
+           
+        
+
+</div>
+<div class="button-container">
+            <a href="https://www.facebook.com/md.ali.jim.official" class="button">Facebook</a>
+            <a href="index.html" class="button">Log Out Now</a>
+            <a href="index.html" class="button">Home</a>
+           
+        
+
+</div>
+    </div>
+
+    <div class="chart-container">
+        <h1>PXP Coin</h1>
+        <h2>Value of (1000) PXP</h2>
+        <div class="number-display" id="calculatedNumber">0.00000</div>
+        <canvas id="formulaChart"></canvas>
+    </div>
+</div>
+
+<div class="footer">
+    <p>© 2025 PXP Coin. All Rights Reserved.</p>
+</div>
+
+<script>
+    let chartInstance;
+
+    async function fetchData() {
+        try {
+            let tempResponse = await fetch("https://api.open-meteo.com/v1/forecast?latitude=23.685&longitude=90.3563&daily=temperature_2m_max&timezone=Asia/Dhaka");
+            let tempData = await tempResponse.json();
+            let tempHistory = tempData.daily.temperature_2m_max.slice(-7);
+
+            let usdResponse = await fetch("https://api.exchangerate-api.com/v4/latest/USD");
+            let usdData = await usdResponse.json();
+            let usdRate = usdData.rates.BDT;
+
+            let now = new Date();
+            let date = now.getDate();
+            let month = now.getMonth() + 1;
+            let calculatedValues = [];
+
+            for (let i = 0; i < 7; i++) {
+                let time = now.getHours() + now.getMinutes() / 60;
+                let todayTemp = tempHistory[i] || 30;
+
+                let calculatedValue = (((time + date) - usdRate + (todayTemp + (date * month)) + 27) / 100).toFixed(5);
+                calculatedValues.push(calculatedValue);
+            }
+
+            let calculatedElement = document.getElementById("calculatedNumber");
+            calculatedElement.innerText = calculatedValues[6];
+
+            showGraph(calculatedValues);
+        } catch (error) {
+            console.error("Error fetching data:", error);
+            document.getElementById("calculatedNumber").innerText = "Error!";
+        }
+    }
+
+    function showGraph(values) {
+        const ctx = document.getElementById('formulaChart').getContext('2d');
+
+        if (chartInstance) {
+            chartInstance.destroy();
+        }
+
+        chartInstance = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ["6 Days Ago", "5 Days Ago", "4 Days Ago", "3 Days Ago", "2 Days Ago", "Yesterday", "Today"],
+                datasets: [{
+                    label: 'PXP Value (Last 7 Days)',
+                    data: values,
+                    borderColor: 'green',
+                    borderWidth: 2,
+                    fill: false
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: false
+                    }
+                }
+            }
+        });
+    }
+
+    fetchData();
+</script>
+
+</body>
+</html>
